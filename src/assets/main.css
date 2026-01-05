@@ -1,0 +1,16 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: #000; /* <- importante: si hay gap, no se ve blanco */
+}
+
+#app {
+  margin: 0 !important;
+  padding: 0 !important;
+  max-width: none !important;
+  width: 100%;
+  min-height: 100vh;
+  background: #000; /* <- respaldo */
+}
