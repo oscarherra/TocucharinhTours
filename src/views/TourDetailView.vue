@@ -1,7 +1,6 @@
 <script setup>
 import { ref } from "vue";
 import { useRoute } from "vue-router";
-import { useCartStore } from "@/stores/cart";
 import {
   Clock,
   Calendar,
@@ -13,7 +12,6 @@ import {
 } from "lucide-vue-next";
 
 const route = useRoute();
-const cart = useCartStore();
 
 const tour = ref({
   id: route.params.id,
@@ -34,19 +32,10 @@ const tour = ref({
 });
 
 const activeTab = ref("descripcion");
-
-const addToCart = () => {
-  cart.add({
-    id: tour.value.id,
-    title: tour.value.title,
-    price: tour.value.price,
-  });
-};
 </script>
 
 <template>
   <div class="tour-detail">
-    <!-- HERO -->
     <section class="hero">
       <img :src="tour.heroImage" alt="" />
       <div class="hero-overlay"></div>
@@ -62,16 +51,12 @@ const addToCart = () => {
       </div>
     </section>
 
-    <!-- BREADCRUMB -->
     <div class="breadcrumb">
       Inicio <span>›</span> Tours <span>›</span> {{ tour.title }}
     </div>
 
-    <!-- CONTENIDO -->
     <section class="content">
-      <!-- IZQUIERDA -->
       <div class="main">
-        <!-- Tabs -->
         <div class="tabs">
           <button
             v-for="tab in ['descripcion', 'itinerario', 'incluye', 'politicas']"
@@ -83,7 +68,6 @@ const addToCart = () => {
           </button>
         </div>
 
-        <!-- DESCRIPCIÓN -->
         <div v-if="activeTab === 'descripcion'" class="tab-content">
           <p class="description">{{ tour.description }}</p>
 
@@ -99,7 +83,6 @@ const addToCart = () => {
         </div>
       </div>
 
-      <!-- DERECHA -->
       <aside class="sidebar">
         <div class="price-box">
           <div class="price">
@@ -110,11 +93,11 @@ const addToCart = () => {
             ✔ Disponible todos los días
           </div>
 
-          <button class="reserve" @click="addToCart">
+          <button class="reserve" type="button">
             Reservar ahora
           </button>
 
-          <button class="whatsapp">
+          <button class="whatsapp" type="button">
             Reservar por WhatsApp
           </button>
 
@@ -130,13 +113,11 @@ const addToCart = () => {
 </template>
 
 <style scoped>
-
 .tour-detail {
   background: #fff;
   color: #111;
   min-height: 100vh;
 }
-
 
 .hero {
   position: relative;
@@ -181,13 +162,11 @@ const addToCart = () => {
   opacity: 0.95;
 }
 
-/* ================== BREADCRUMB ================== */
 .breadcrumb {
   padding: 18px 8%;
   font-size: 0.9rem;
   color: #666;
 }
-
 
 .content {
   display: grid;
@@ -195,7 +174,6 @@ const addToCart = () => {
   gap: 40px;
   padding: 40px 8% 80px;
 }
-
 
 .tabs {
   display: flex;
@@ -217,7 +195,6 @@ const addToCart = () => {
   border-bottom: 2px solid #111;
 }
 
-
 .description {
   margin: 30px 0;
   font-size: 1.05rem;
@@ -238,7 +215,6 @@ const addToCart = () => {
   color: #333;
 }
 
-/* ================== SIDEBAR ================== */
 .sidebar {
   position: sticky;
   top: 120px;
@@ -302,9 +278,16 @@ const addToCart = () => {
   margin-bottom: 10px;
 }
 
-
 @media (max-width: 900px) {
   .content {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-content h1 {
+    font-size: 2.5rem;
+  }
+
+  .facts {
     grid-template-columns: 1fr;
   }
 }

@@ -1,11 +1,9 @@
 <script setup>
 import { computed, ref } from "vue";
-import { useCartStore } from "@/stores/cart";
 import { Search, Clock, ArrowRight } from "lucide-vue-next";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
-const cart = useCartStore();
 
 const q = ref("");
 const tab = ref("all");

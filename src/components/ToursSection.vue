@@ -1,55 +1,4 @@
-<template>
-  <section class="tours" id="tours">
-    <div class="wrap">
-      <header class="head">
-        <div>
-          <h2>Nuestros</h2>
-          <p class="subtitle">Tours Selectos.</p>
-        </div>
-
-        <p class="desc">
-          Cada Tour es el resultado de nuestras aventuras y dedicación, combinando cultura,
-          naturaleza e innovación para ofrecer experiencias inolvidables.
-        </p>
-
-        <a class="cta" href="#">EXPLORAR TOURS</a>
-      </header>
-    </div>
-
-    <div class="grid">
-      <article class="card" v-for="t in tours" :key="t.title">
-        <div class="img" :style="{ backgroundImage: `url(${t.image})` }"></div>
-        <div class="shade"></div>
-
-        <div class="content">
-          <h3>{{ t.title }}</h3>
-          <p>{{ t.excerpt }}</p>
-          <div class="price">{{ t.price }}</div>
-
-          <div class="actions">
-            <!-- ✅ ESTE es el cambio: button + click -->
-            <button class="link" @click="addToCart(t)">Reservar</button>
-            <a href="#">Ver Detalles</a>
-          </div>
-        </div>
-      </article>
-    </div>
-  </section>
-</template>
-
 <script setup>
-import { useCartStore } from "../stores/cart"; // si usas @/stores/cart, cambia esta línea
-
-const cart = useCartStore();
-
-const addToCart = (t) => {
-  cart.add({
-    title: t.title,
-    price: t.price,
-    priceNumber: t.priceNumber,
-  });
-};
-
 const tours = [
   {
     title: "Ascenso al Volcán Ricón de la Vieja",
@@ -86,8 +35,45 @@ const tours = [
 ];
 </script>
 
+<template>
+  <section class="tours" id="tours">
+    <div class="wrap">
+      <header class="head">
+        <div>
+          <h2>Nuestros</h2>
+          <p class="subtitle">Tours Selectos.</p>
+        </div>
+
+        <p class="desc">
+          Cada Tour es el resultado de nuestras aventuras y dedicación, combinando cultura,
+          naturaleza e innovación para ofrecer experiencias inolvidables.
+        </p>
+
+        <a class="cta" href="#">EXPLORAR TOURS</a>
+      </header>
+    </div>
+
+    <div class="grid">
+      <article class="card" v-for="t in tours" :key="t.title">
+        <div class="img" :style="{ backgroundImage: `url(${t.image})` }"></div>
+        <div class="shade"></div>
+
+        <div class="content">
+          <h3>{{ t.title }}</h3>
+          <p>{{ t.excerpt }}</p>
+          <div class="price">{{ t.price }}</div>
+
+          <div class="actions">
+            <button class="link" type="button">Reservar</button>
+            <a href="#">Ver Detalles</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+</template>
+
 <style scoped>
-/* Sección */
 .tours {
   background: #fff;
   padding: 110px 0 0;
@@ -137,7 +123,6 @@ const tours = [
   padding-bottom: 6px;
 }
 
-/* Grid full width como referencia */
 .grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -150,7 +135,6 @@ const tours = [
   height: 78vh;
   min-height: 520px;
   overflow: hidden;
-  border-radius: 0;
 }
 
 .img {
@@ -204,7 +188,6 @@ const tours = [
   margin-bottom: 10px;
 }
 
-/* ✅ Tus links + botón con mismo estilo */
 .actions a,
 .link {
   margin-right: 18px;
@@ -221,11 +204,11 @@ const tours = [
   cursor: pointer;
 }
 
-/* Responsive */
 @media (max-width: 1100px) {
   .grid {
     grid-template-columns: repeat(2, 1fr);
   }
+
   .card {
     height: 60vh;
     min-height: 460px;
@@ -238,13 +221,16 @@ const tours = [
     gap: 10px;
     padding: 0 10px 10px;
   }
+
   .card {
     height: 65vh;
     min-height: 520px;
   }
+
   .content h3 {
     font-size: 1.7rem;
   }
+
   .price {
     font-size: 1.8rem;
   }
